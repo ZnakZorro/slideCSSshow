@@ -625,6 +625,7 @@ window.addEventListener('resize', function(event){
 		out = out.replace(/(^\d+_)/,'');
 		out = out.replace('_',' ');
 		if (out==='Stanley') out='';
+		out = out.replace('!!!','<br />');
 		return out;
 	}
 	
