@@ -1,34 +1,100 @@
-<html lang="pl"> 
-<head> 
-<meta charset="utf-8">
-<meta http-equiv="refresh" content="3600"> 
-<title>SlideCSSshow</title> 
-<meta name="viewport" content="width=device-width,initial-scale=1"> 
-<meta name="mobile-web-app-capable" content="yes"> 
-<link rel="icon" type="image/png" size="128x128" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACAAgMAAAC+UIlYAAAACVBMVEUAAAAAAAAAAACDY+nAAAAAAnRSTlMAgJsrThgAAADpSURBVFjD7dHBCQMxDERR70VFpJrUo2pURC5SlcEszkCEfwPruRn9wwOPv13vwbMYvNdn8Dz5flUxwqqCCVWM8KpkQjHCZhBMYITPIJHACLuDIAIj/A4SCIywFQQQEOErSCAQwhQEEADhChIIQgBBiEYQAghCNAIgRBACCEI0ghBAEAIIQjSCEEgQQgRGWA+iERDhPUggCAEEIUQAhAgNIQIgRGgIEQAhQkeIwAjbBSECI3wXpAiIsH0QIhDC90GKAAijIBaBEE5BLgIgjIOYBESIQN+xu87bCZ4brPcJTnCCE5zgfp/99gV7t1BMVMeE7wAAAABJRU5ErkJggg=="> <br />
+<!doctype html>
+<html lang="pl">
+<head>
+<meta http-equiv="expires" content="0">
+<meta http-equiv="cache-control" content="no-store, no-cache, must-revalidate">
+<meta http-equiv="cache-control" content="post-check=0, pre-check=0">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="max-age=0">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="-1">
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 11:00:00 GMT">
+<link rel="manifest" href="https://www.wi.zut.edu.pl/tvinfo/tv/tv.manifest">
+<link href="/tvinfo/tv/img/wi-32.png" rel="shortcut icon" />
+<!--meta http-equiv="refresh" content="600; url=https://www.wi.zut.edu.pl/tvinfo/tvparter/wi1/" /-->
+<meta http-equiv="refresh" content="1800" />
+<meta name="theme-color" content="#aaaa22"/>
+    <meta charset="utf-8">
+    <!--meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TV parter</title>
+ 
+	<script src="./js/tablica.js"></script>
+	<script src="./js/skrypty.js.php"></script>
+	<!--script src="./js/axios/axios.min.js"></script-->
+	<!--script src="./js/hnl.mobileConsole.js"></script-->
 <style>
-body {
-	font-family:verdana;
-    overflow: hidden;
-    font-size: 11pt;
-    line-height: 1.33;
-    background: white;
-    color: #000;
-    padding: 0;
-    background: #f8f8f8;
-    color: #000;
-    margin: 0;
-}
-div.slide{
-    width: 100%;
-    margin-bottom: 1.2em;
-	color:inherit;
-	text-align:center;
-}
-div.slide img {
-    width: 100%;
-    margin-bottom: 0.2em;
-}
+	*, ::after, ::before {
+		box-sizing: border-box;
+	}
+	html {
+		font-family:Verdana, Arial, sans-serif;
+	}
+    body {
+		overflow: hidden;
+		font-size: 2.5vw;
+		line-height:1.33;
+		background: white;
+		color: #000;
+		padding:0;
+		background: #f8f8f8;
+		color: #000;
+		margin:0;
+	}
+	p {margin:0;}
+	h1 {font-size: 4.5vw; margin-top:1vw; margin-bottom:1vw;font-weight: bold;}
+	h3 {
+		font-size: 1.33em;
+		margin-top: 0.7em;
+		margin-bottom: 0.2em;
+	}
+	
+	.card {background:#000;}
+	td {font-weight:bold;}
+	td span.n {
+		font-weight: normal;
+		font-style: italic;
+	}	
+	td.s {
+		font-size: 0.9em;
+	}	
+	th {background: #222;text-align:center;}
+	th:nth-child(2) {background: #000;}
+	
+	table {
+		color: #000;
+		background-color: #fff;
+	}
+	td,th,thead th {
+		border-color: #ccc;
+		padding: .75em;
+		vertical-align: top;
+		border-top: 1px solid #dee2e6;
+	}
+	th {background: #e8e8e8;}
+	th:nth-child(2) {background: #f0f0f0;}	
+		
+	.table td, .table th {
+		padding: 0.4vh 1vw 0.4vh 1vw;
+		vertical-align: top;
+	}	
+
+#extraTAB {text-align:center;}
+#debug {font-size:10px; position:absolute;bottom:10px; left:10px; color:white; background:DodgerBlue;padding:4px 8px;}
+	p.adres, #informacje span{margin-top:1.33vw;}
+	
+	span#czas,span#pogoda {
+		display: block;
+		clear: both;
+		text-align: right;
+	}	
+	span#pogoda {
+		font-size: 0.90em;
+		margin-top: 0.8em;
+		display: inline-block;
+	}
+	
+/*Bootstrap*/
 .container-fluid {
     width: 100%;
     padding-right: 1vw;
@@ -42,18 +108,88 @@ div.slide img {
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 }
-</style>
+.col-sm {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    width: 100%;
+	position: relative;
+}
+.table {
+    width: 100%;
+    margin-bottom: 1em;
+}
+/*Bootstrap*/
 
-<!--[if lt IE 9]>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
-<script src="./js/poly/polyfill_sheet.js"></script>
-<script src="./js/poly/selectivizr-min.js"></script>
 
-<![endif]-->
+#planTV {font-size:0.9em; line-height:1.4; text-align:center; }	
 
+
+div.lekcja {
+    position: relative;
+    width: 19.3%;
+    height: 4em;
+    background: #fff;
+    color: black;
+    overflow: hidden;
+    padding: 0;
+    line-height: 1.23em;
+    display: inline-block;
+    margin-right: 0.5vw;
+	padding-top: 0.25em;
+}
+div.godzina {background:#eee;position: relative;}
+p.sala {
+    font-size: 1.5em;
+    position: absolute;
+    top: 0.6em;
+    left: -1.45em;
+    height: 1.6em;
+    width: 4.55em;
+    padding: 0.1em;
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg);
+    text-align: center;
+    font-weight: normal;
+    background: #444;
+    color: #fff;
+}
+
+p.grupa {
+    font-size: 1em;
+    font-weight: bold;
+}
+p.grupa, p.opis {
+    margin-left: 3em;
+}
+
+.p0 {background: #F5F5DC !important;color: black !important;}
+.p1 {background: #8a00c1 !important;color: white !important;}
+.p2 {background: #1919FF !important;color: white !important;}
+.p3 {background: #f8ed62 !important;color: black !important;}
+
+.blask {
+  -webkit-animation: 	redblink 3s infinite;  /* Safari 4+ */
+  -moz-animation: 		redblink 3s infinite;  /* Fx 5+ */
+  -o-animation: 		redblink 3s infinite;  /* Opera 12+ */
+  animation: 			redblink 3s infinite;  /* IE 10+, Fx 29+ */
+}
+
+@keyframes redblink {
+	0%		{background-color: #8b8;}
+	50%		{background-color: #8f8;}
+	100%	{background-color: #8b8;}
+}
+
+
+div.slide {width:100%;margin-bottom:1em; background:#eee;color:#333;}
+div.slide img{width:100%;}
+
+</style>	
 
 <script>
-	if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator) {
 	  window.addEventListener('load', function() {
 		navigator.serviceWorker.register('https://www.wi.zut.edu.pl/tvinfo/tv/tv-sw.js').then(function(registration) {
 		  console.log('ServiceWorker registration successful with scope: ', registration.scope);
@@ -63,154 +199,481 @@ div.slide img {
 	  });
 	}
 </script>
+	
+</head>
+  
+<body>
+
+
+
+<div class="container-fluid" >
+	<div class="row">
+		<div class="col-sm" id="extraTAB"></div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm" id="infoTAB"></div><!--col-->
+		<div class="col-sm" id="komunikat" style="display:none;"></div><!--col-->
+	</div><!--row-->
+	
+	
+	<span id="info"></span>			
+		
+</div><!--container-->
+
+
+	
+<div class="container-fluid" >
+	<div class="row" id="row">
+		<div class="col-sm" id="planTV"><h1>Czekamy!</h1>
+		</div><!--col-->
+	</div><!--row-->	
+</div><!--container-->
+<div id="koniec" style="display:block; font-size:1px;">.</div>	
+
+	
+<a href="javascript:window.close()"><div id="debug">???</div></a>
+<div id="modalx" style="display:none;">???</div>	
+
 
 <script>
-/*====================================*/
 
-//function _$(y){return document.querySelector(y);}
-//function _$$(y) {return document.querySelectorAll(y);} 	
+function _$(y){return document.querySelector(y);}
+function _$$(y) {return document.querySelectorAll(y);} 	
 
+function getURLParameter(name) {
+	return decodeURIComponent(
+		(location.search.match(RegExp("[?|&]"+name+'=(.+?)(&|$)'))||[,'WI1'])[1]
+	);
+}	
 
-console.log('/*=== slideCSSshow ===============================*/');
-
-var slideCSSshow = function(element,option){
-	this.imagesLen=0;
-	this.imagesCounter=0;
-	//direction = [vertical,horizontal]
-	//
-	this.option={
-		element:"#slideshow",
-		direction:"vertical",
-		time :20,
-		background: "#888f88",
-		color: "#fff",
-		revers:false
-	}
-
-	if (element) this.option['element']=element;
-	if (option){
-		for (var o in option){
-			console.log(o,option[o])
-			this.option[o]=option[o];
+function ajaxx(url,callback){
+		var request;
+		if (window.XMLHttpRequest) { //Netscape, Safari, ...
+		  request = new XMLHttpRequest();
+		} else if (window.ActiveXObject) { //IE
+		  try {
+			request = new ActiveXObject('Msxml2.XMLHTTP');
+		  } catch (e) {
+			try {
+			  request = new ActiveXObject('Microsoft.XMLHTTP');
+			} catch (e) {}
+		  }
 		}
-	}
+		request.open('GET', url, true);
+		request.send();
+		request.onreadystatechange = function() {
+		
+			if(request.readyState === 4) {
+				if(request.status === 200) {
+					callback(request.responseText)
+				}
+			}
+		};
+}
+
+function ajaxxPOST(url,posty,callback){
+		var request;
+		if (window.XMLHttpRequest) { //Netscape, Safari, ...
+		  request = new XMLHttpRequest();
+		} else if (window.ActiveXObject) { //IE
+		  try {
+			request = new ActiveXObject('Msxml2.XMLHTTP');
+		  } catch (e) {
+			try {
+			  request = new ActiveXObject('Microsoft.XMLHTTP');
+			} catch (e) {}
+		  }
+		}	
+		request.open('POST', url, true);
+		request.send(posty);
+		request.onreadystatechange = function() {
+			if(request.readyState === 4) {
+				if(request.status === 200) {    
+					callback(request.responseText)
+				}
+			}
+		};
+}
+
+var test = false; 
+var tv = getURLParameter('tv');
+console.log('tv='+tv)
+if (tv=='test') {test=true; tv = 'WI1';}
+var cacheName = '___TV_'+tv;
+var cache = null;
+
+function storeToCache(ret){
+	localStorage.setItem(cacheName, JSON.stringify(ret));
+	if(!test) cache = localStorage.getItem(cacheName);
+	//console.log(cacheName,cache);
+	//localStorage.removeItem(cacheName);	
 }
 
 
-slideCSSshow.prototype = {
-
-	play: function(index) {
-		if (index) this.option['index']=index;
-		this.jsonGET("/tvinfo/tv/tvfoto.json.php",this.wstawFotosy);
-	},
-	
-	jsonGET : function (url,callback){
-		var self=this;
-			var request;
-			if (window.XMLHttpRequest) {
-			  request = new XMLHttpRequest();
-			} else if (window.ActiveXObject) {
-			  try {
-				request = new ActiveXObject('Msxml2.XMLHTTP');
-			  } catch (e) {
-				try {
-				  request = new ActiveXObject('Microsoft.XMLHTTP');
-				} catch (e) {}
-			  }
-			}
-			request.open('GET', url, true);
-			request.send();
-			request.onreadystatechange = function() {
-			
-				if(request.readyState === 4) {
-					if(request.status === 200) {
-						callback(request.responseText,self)
-					}
+var ileDanych = 0;
+var successData = function(ret){
+	console.log('successData()');
+	if(typeof(ret)==="string") ret = JSON.parse(ret);
+	console.log('#315= ',typeof(ret), ret.length);
+	console.log(ret);
+	storeToCache(ret);
+	var dataczas = toDate();
+	//qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq1
+	ret.forEach(function(day){
+		//console.log(dataczas,day.date,dataczas===day.date)
+		if (dataczas===day.date){
+			console.log(dataczas,day.date,dataczas===day.date);
+			var lessons = day.lessons;
+			_$("#planTV").innerHTML ='';
+			var godziny = {}
+			lessons.forEach(function(lesson){
+				if (lesson.room.indexOf(tv) >-1){
+					var oddo = lesson.timeRange.from+' - '+lesson.timeRange.to;
+					if (!godziny[oddo]) godziny[oddo]=[];
+					godziny[oddo].push(lesson);
 				}
-			};
-	},
-	
-	wstawFotosy : function(ret,self){
-		console.log('#126 wstawFotosy self=');	console.log(self);
-		var obj = JSON.parse(ret);
-		var eleslide = document.querySelector(self.option.element);
-		eleslide.innerHTML ='';
-		
-		if (obj){
-			obj.forEach(function(img,i){
-				var title=img.split('/').pop();
-				eleslide.innerHTML += '<div class="slide"><img src="'+img+'" /><br />'+title+'</div>';
 			});
-			
-			var imagesnodelist = document.querySelectorAll(self.option.element+ ' img');
-			var images = Array.prototype.slice.call(imagesnodelist);
-			//console.log(images);
-			
-			images.forEach(function(img){
-				img.addEventListener( 'load', function(){self.incrementCounter(self)}, false );
-				self.imagesLen++;
-			});
-			//self.installAnimation(self);
-
 		}
-	},
+		var nr=0;
+		for (h in godziny){
+			var godz = godziny[h];
+			var HTML = '';
+			HTML += '<h3>'+h+', '+tv+', '+toDate("dw")+', '+dataczas+'</h3>';
+			HTML += '<div class="lekcje">';
+			var pietro = 'x';
+			godz.forEach(function(g,i){
+				var teacher   = g.teacher.academicTitle+' '+g.teacher.name+' '+g.teacher.surname;
+					if (teacher.length>30) teacher   = g.teacher.academicTitle+' '+g.teacher.name[0]+'. '+g.teacher.surname;
+				var subject   = g.subject;
+				var group     = g.group;
+				var room      = g.room;
+				var roo = room.match(/\d*.$/);
+				if (roo[0]) room= roo[0];
+				pietro = (((room).toString())[0])
+				 HTML += '<div class="lekcja p'+pietro+'">';
+					HTML += '<p class="sala">'+room+'</p>';
+					HTML += '<p class="grupa">'+group+'</p>';
+					HTML += '<p class="opis">'+teacher+'<br />'+subject+'</p>';
+				HTML += '</div>';
+				 
+			});
+			HTML += '</div>';
+			var klasa = '';
+			if (nr++===0) klasa = 'blask';
+			_$("#planTV").innerHTML += '<div class="godzina '+tv+' '+klasa+'">'+HTML+'</div>';
+			//console.log(nr,godziny.length,godziny);
+			ileDanych++;
+		}
+		//_$("#planTV").innerHTML += '<div id="koniec">.</div>';
+		
+	});
 	
-	incrementCounter : function(self){
-		self.imagesCounter++;
-		//console.log('#96===incrementCounter',self.imagesCounter,self.imagesLen)
-		if (self.imagesCounter===self.imagesLen) self.installAnimation(self);
-	},
+	console.log(ileDanych);
+	//qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq2
+		
+		if (ileDanych>0){
+			// blask +++++++++++++++++++++++++
+			setTimeout(function(){
+				setBlask();
+				checkView();
+				document.getElementById("czas").textContent=(toDate('time'));
+			},333);
+		} else {
+			// brak danych
+			brakDanych();
+			
+		}
 
-	installAnimation : function(self){
-		// if ff to time / 10;
-		var sekund = self.imagesLen*self.option.time;
-			console.log(self.option.direction);
-			console.log(self.option.revers);
+}
+
+
+function toDate(co){
+	//console.log('#374 toDate=',typeof(co));
+	//if (typeof(co)==='object'){
+		//console.log('#376 =',co);
+	//}
+	var weekdays = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
+	var d = new Date();
+	if (typeof(co)==='object') d = new Date(co);
+	var rok     = d.getFullYear(); 
+	var miesiac = d.getMonth()+1;  if (miesiac<10) miesiac = '0'+miesiac;
+	var dzien   = d.getDate();     if (dzien<10)   dzien   = '0'+dzien;
+	var dw      = d.getDay();
+	var godzina = d.getHours();    if (godzina<10) godzina = '0'+godzina;
+	var minuta  = d.getMinutes();  if (minuta<10)  minuta  = '0'+minuta;
+	var sekunda = d.getSeconds();  if (sekunda<10) sekunda = '0'+sekunda;
+	if      (co==="minuty")  return (parseInt(godzina)*60) + parseInt(minuta);
+	else if (co==="dw")      return weekdays[dw];
+	else if (co==="time")    return dzien+'.'+miesiac+'.'+rok+', '+godzina+':'+minuta;//+':'+sekunda;
+	else                     return dzien+'-'+miesiac+'-'+rok;
+}
+
+function jutro(){
+	var tomorrow = new Date();
+	tomorrow = new Date(tomorrow.getTime() + (24 * 60 * 60 * 1000));
+	return tomorrow;
+}
+
+
+
+function setBlask(){
+		var linie  = document.querySelectorAll('div#planTV div.godzina');
+		var minlinia=null;
+		var lastdelta=1000;
+		linie.forEach(function(lina){
+			lina.classList.remove("blask");
+			var h3=lina.querySelector('h3');
+			var godzina=h3.textContent.split('-')[0];
+			var minutyarr = godzina.split(':');
+			var minuta = (parseInt(minutyarr[0])*60) + parseInt(minutyarr[1]);
+			var aminuta = toDate('minuty');
+			var delta = Math.abs(minuta - aminuta);
+			//console.log('lina=',lina,h3,godzina,minuta,aminuta,delta);
+			//console.log('delta=',delta,(1000-delta),(delta-1000));
+			if (delta<lastdelta) {minlinia=lina}
+			lastdelta=delta;
+		});
+		//console.log(minlinia)
+		minlinia.classList.add("blask");
+}
+
+function checkView(){
+//2160x3839
+//560x994
+//3839/994=3.86
+//2160/3.86=559.58
+	var w = window.innerWidth;
+	var h = window.innerHeight;
+	var ww = Math.round(2160/(3839/h));
+	var koniec = document.querySelector('#koniec');
+	//if (!koniec) return;
+			var lastElement = Math.round(koniec.getBoundingClientRect().bottom);
+			var offset   = Math.round(h-lastElement);
+			//console.log(koniec.getBoundingClientRect())
+			console.log((w-ww)+' checkView=',ww+' / '+w+' x '+h+' offset to BOTTOM=' + offset,'lastElement='+lastElement);
+			document.getElementById('debug').textContent=(w-ww)+' ('+ww+') '+w+' x '+h+' > '+offset;
+	return (w-ww)+' ('+ww+') '+w+' x '+h+' > '+offset;
+}
+
+		var INTERNET="online";
+		
+		var updateOnlineStatus = function(event) {
+			INTERNET = navigator.onLine ? "online" : "offline";
+			console.log('INTERNET status='+INTERNET);
+		  }
+
+		  window.addEventListener('online',  updateOnlineStatus);
+		  window.addEventListener('offline', updateOnlineStatus);
+
+
+// DOM READY
+document.addEventListener('DOMContentLoaded', function() {
+var dateFrom = toDate();
+var dateTo   = toDate(jutro());
+
+//var urr = 'https://www.wi.zut.edu.pl/tvinfo/tv/plan.zut.edu.pl.porta.php?url='+('http://plan.zut.edu.pl/api/schedule/?facultyAbbreviation=WI&dateFrom='+dateFrom+'&dateTo='+dateTo);
+var url = 'https://www.wi.zut.edu.pl/tvinfo/tv/plan.zut.edu.pl.porta.php?url='+encodeURIComponent('http://plan.zut.edu.pl/api/schedule/?facultyAbbreviation=WI&dateFrom='+dateFrom+'&dateTo='+dateTo);
+
+//if (test) var url = 'https://www.wi.zut.edu.pl/tvinfo/tv/plan.zut.edu.pl.porta.php?url=http%3A%2F%2Fplan.zut.edu.pl%2Fapi%2Fschedule%2F%3FfacultyAbbreviation%3DWI%26dateFrom%3D24-06-2019%26dateTo%3D02-07-2019';
+if (test) var url = 'https://www.wi.zut.edu.pl/tvinfo/tv/plan.zut.edu.pl.porta.php?url=http%3A%2F%2Fplan.zut.edu.pl%2Fapi%2Fschedule%2F%3FfacultyAbbreviation%3DWI%26dateFrom%3D02-07-2019%26dateTo%3D03-07-2019';
+console.log(url);
+
+					
+					var isIE = false;
+					var ua = window.navigator.userAgent;
+					var old_ie = ua.indexOf('MSIE ');
+					var new_ie = ua.indexOf('Trident/');
+					if ((old_ie > -1) || (new_ie > -1)) {
+						isIE = true;
+					}
+					
+					function ifisIE(userAgent) {
+					  userAgent = userAgent || navigator.userAgent;
+					  return userAgent.indexOf("MSIE ") > -1 || userAgent.indexOf("Trident/") > -1 || userAgent.indexOf("Edge/") > -1;
+					}					
+					var isIE = ifisIE();
+					//isIE=true;
+
+console.log('INTERNET status='+INTERNET+' isIE==='+isIE);
+	updateOnlineStatus();
+	//var jsonurl = './'+tv.toLowerCase()+".json?it="+(new Date()).getTime();
+	var jsonurl = './'+tv.toLowerCase()+".json";
+	ajaxx(jsonurl,opiszTablice);
+	//console.log(url)
+
+if (INTERNET=="online")
+//if (true)
+{
+			if(isIE) {
+				console.log('isIE='+isIE)
+				ajaxx(url,successData);
+			}
+			else {
+				//fffffffffffffffffff firefox mobile app error not fetching
+				fetch(url)
+				.then(function(response) {
+					//console.log(response)
+					return response.json();
+				})
+				.then(function(data) {
+					//console.log(data)
+					successData(data);
+				})
+				.catch(function(err) {
+					console.log('#523 err='+JSON.stringify(err),test);
+					if(!test) cache = localStorage.getItem(cacheName);
+					//console.log('#525 cache='+cache);
+					//if (cache == null wyswietlaj slideshow)
+					if (cache){
+						console.log('#526 ERROR === data from cache');
+						successData(JSON.parse(cache));
+					} else brakDanych();
+				});	
+			}
+	
+} else {
+		if(!test) cache = localStorage.getItem(cacheName);
+		if (cache){
+			successData(JSON.parse(cache));
+		}
+}
+
+	
+		document.getElementById("czas").textContent=(toDate('time'));
+	setInterval(function(){
+		document.getElementById("czas").textContent=(toDate('time'));
+		checkView();
+	},30000);
+});// dom ready
+
+
+window.addEventListener('resize', function(event){
+	checkView();
+	installAnimation()
+});
+
+
+	var imagesLen = 0;
+	var imagesCounter = 0;	
+
+	function installAnimation(){
+		console.log('installAnimation() imagesLen=',imagesLen)
+		var sekund = imagesLen*30;
 			var w = window.innerWidth;
 			var h = window.innerHeight;
-			var el = self.option.element;
-			var koniec = document.querySelector(el);
+			var koniec = document.querySelector('#planTV');
+			//console.log(koniec.getBoundingClientRect())
 			var botttom    = Math.round(koniec.getBoundingClientRect().bottom);
-			var sheet = document.styleSheets[0];
-			console.log(sheet)
-				sheet.insertRule("#row {overflow: hidden;}");
-				sheet.insertRule(el+" div{width:100%;}");
-				sheet.insertRule(el+" div img{width:100%;}");
-				sheet.insertRule(el+"{background: "+self.option.background+";}");
-				sheet.insertRule(el+"{color: "+self.option.color+";}");
-				sheet.insertRule(el+"{animation-name: move;}");
-				sheet.insertRule(el+"{animation-duration: "+sekund+"s;}");
-				sheet.insertRule(el+"{animation-iteration-count: infinite;}");
-				sheet.insertRule(el+"{animation-timing-function: linear;}");
-				sheet.insertRule(el+":hover  {animation-play-state: paused;}");
-				// tylko w gore
-				sheet.insertRule("@keyframes move {0% {margin-top: 0px;} 100% {margin-top: -"+botttom+"px;}}");
-				// w gore i w dol
-				//sheet.insertRule("@keyframes move {0% {margin-top: 0px;} 10% {margin-top: -"+botttom+"px;} 0% {margin-top: 0px;}}");		
+			//console.log(w,h,'bottom='+botttom,'sekund='+sekund)
+		var sheet = document.styleSheets[0];
+		//console.log(sheet)
+		sheet.insertRule("#row {overflow: hidden;}");
+		//sheet.insertRule("#planTV {background: #567d46;}");
+		sheet.insertRule("#planTV {background: #eee;}");
+		sheet.insertRule("#planTV {color: #222;}");
+			sheet.insertRule("#planTV {-webkit-animation-name: move;}");
+			sheet.insertRule("#planTV {-webkit-animation-duration: "+sekund+"s;}");
+			sheet.insertRule("#planTV {-webkit-animation-iteration-count: infinite;}");
+			sheet.insertRule("#planTV {-webkit-animation-timing-function: linear;}");
+			sheet.insertRule("#planTV:hover  {-webkit-animation-play-state: paused;}");
+				sheet.insertRule("#planTV {animation-name: move;}");
+				sheet.insertRule("#planTV {animation-duration: "+sekund+"s;}");
+				sheet.insertRule("#planTV {animation-iteration-count: infinite;}");
+				sheet.insertRule("#planTV {animation-timing-function: linear;}");
+				sheet.insertRule("#planTV:hover  {animation-play-state: paused;}");
+		sheet.insertRule("@-webkit-keyframes move {0% {margin-top: 0px;} 100% {margin-top: -"+botttom+"px;}}");
+		sheet.insertRule("@keyframes move {0% {margin-top: 0px;} 100% {margin-top: -"+botttom+"px;}}");
+		//sheet.insertRule("@-webkit-keyframes move {0% {margin-top: 0px;} 50% {margin-top: -"+botttom+"px;} 0% {margin-top: 0px;}}");
+		//sheet.insertRule("@keyframes move {0% {margin-top: 0px;} 10% {margin-top: -"+botttom+"px;} 0% {margin-top: 0px;}}");
+		checkView();
+	}
+
+
+
+	function shuffle(a) {
+		var j, x, i;
+		for (i = a.length - 1; i > 0; i--) {
+			j = Math.floor(Math.random() * (i + 1));
+			x = a[i];a[i] = a[j];a[j] = x;
+		}
+		return a;
 	}
 	
-}
+
+	var incrementCounter = function(){
+		imagesCounter++;
+		//console.log('incrementCounter',imagesCounter,imagesLen)
+		if (imagesCounter===imagesLen) installAnimation();
+	}	
+		
+	function scrollUp(){
+		var images = _$$('#planTV img');
+		images.forEach(function(img){
+			img.addEventListener( 'load', incrementCounter, false );
+			imagesLen++;
+		});
+		//console.log(images.length,images)
+	}
+
+	var createTittle = function(path) {		
+		let out = path.split('/').pop();
+		let arr = out.split('.');
+		let rest =arr.pop();
+		out = arr.join('.');
+		out = out.replace(/(-\d+$)/,'');
+		out = out.replace(/(^\d+_)/,'');
+		out = out.replace('_',' ');
+		if (out==='Stanley') out='';
+		return out;
+	}
+	
+	var wstawFotosy = function(ret){
+		//console.log('wstawFotosy=',ret);
+		var obj = JSON.parse(ret);
+		//obj = shuffle(obj);
+		//console.log(obj.length,obj)
+		_$("#planTV").innerHTML = '';
+		obj.forEach(function(foto){
+			var title = createTittle(foto);
+			console.log(title);
+			_$("#planTV").innerHTML += '<div class="slide"><img src="'+foto+'" /><br />'+title+'</div>';
+		});
+		scrollUp();
+		
+	}
+	
+	function brakDanych(){
+		_$("#planTV").innerHTML += '<div id="koniec"><h1 style="color:red;">Brak danych!</h1></div>';
+		var fotosy = ajaxx("/tvinfo/tv/tvfoto.json.php",wstawFotosy);
+		checkView();
+	}
 
 
 
-
-	document.addEventListener('DOMContentLoaded', function() {
-		var mySlide = new slideCSSshow('#planTV',{time:15,direction:'vertical',revers:true,background:"#ff8",color:"#222"});
-		mySlide.play(1);
-	});// dom ready
-
+// co 5 sek - czy refresh ***************************************************************************
+setInterval(function(){
+	var token = (new Date()).getTime();
+	// check if refresh
+	ajaxx('/tvinfo/tv/refresh.json?token='+token,function(ret){
+		//console.log('refresh.json=',ret);
+		if (ret){
+			var ileret = parseInt(ret);
+			console.log('--------z odczytu--ileret=',ileret);
+			if (ileret>0){
+				ileret--;
+				console.log('--------do zapisu--ileret=',ileret);
+				ajaxx('./refresh.php?step='+ileret+'&token='+token,function(ret){
+					setTimeout(function(){location.reload();},10000);
+				})
+			}
+		}
+	});
+},5000);
+// co 5 sek - czy refresh ***************************************************************************
 
 
 </script>
-</head>
-
-<body>
-
-<div class="container-fluid">
-	<div class="row" id="row">
-		<div class="col-sm" id="planTV">
-		</div>
-	</div>
-</div>
 
 </body>
+</html>
