@@ -1,0 +1,32 @@
+
+	#row {
+    	/*height: 800px;	*/
+    	border: 1px solid #333;
+    	overflow: hidden;
+    	margin: 25px auto;
+    }
+    
+    #planyTV {
+    	background: orange;
+    	/*height: 800px;*/
+    	
+    	
+    	-webkit-animation-name: move;
+    	-webkit-animation-duration: 30s;
+    	-webkit-animation-iteration-count: infinite;
+    	-webkit-animation-direction: right;
+    	-webkit-animation-timing-function: linear;
+    }
+    
+    #planyTV:hover {
+    	-webkit-animation-play-state: paused;
+    }
+    
+    @-webkit-keyframes move {
+    	0% {
+    		margin-top: 0px;
+    	}
+    	100% {
+    		margin-top: -900px;
+    	}
+    }

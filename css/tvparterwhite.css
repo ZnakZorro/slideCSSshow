@@ -1,0 +1,37 @@
+    body {
+		background: #f8f8f8;
+		color: #000;
+		font-size: 60px;
+	}
+table{
+	font-size:100%;
+    color: #000;
+    background-color: #fff;
+}
+.table td, .table th, thead th {
+	font-weight: bold;
+    border-color: #ccc;
+	padding: 0.25em 0.33em 0.25em 0.33em;
+	vertical-align: top;
+	
+}
+.table th {background: #e8e8e8;text-align:center;}
+.table th:nth-child(2) {background: #f0f0f0;}
+.table td.s {font-size: 90%;}	
+h1 {font-size: 200%;font-weight:bold;}
+#czas {clear:both; float:right;margin:0.5em;}
+
+	
+/*	
+	
+	td {font-weight:bold;}
+	td span.n {
+		font-weight: normal;
+		font-style: italic;
+	}	
+	
+	
+
+
+
+*/

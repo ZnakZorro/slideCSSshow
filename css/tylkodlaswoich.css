@@ -1,0 +1,7 @@
+body {background:yellow;}
+	/*
+	div#top 	{height:44.5vh;}
+	div#bottom 	{height:55.0vh;}
+	*/
+	div#top 	{height:60vh!important;}
+	div#bottom 	{height:40vh!important;}	

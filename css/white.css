@@ -1,0 +1,14 @@
+body {
+    background: #f8f8f8;
+    color: #000;
+}
+
+.table-dark {
+    color: #000;
+    background-color: #fff;
+}
+.table-dark td, .table-dark th, .table-dark thead th {
+    border-color: #ccc;
+}
+th {background: #e8e8e8;}
+th:nth-child(2) {background: #f0f0f0;}

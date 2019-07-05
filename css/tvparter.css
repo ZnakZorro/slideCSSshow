@@ -1,0 +1,77 @@
+    body {
+		background: white;
+		color: #000;
+		padding-top: 0.5vh;
+		font-size: 3.3vw;
+	}
+	.card {background:#000;}
+	td {font-weight:bold;}
+	td span.n {
+		font-weight: normal;
+		font-style: italic;
+	}	
+	td.s {
+		font-size: 0.9em;
+	}	
+	th {background: #222;text-align:center;}
+	th:nth-child(2) {background: #000;}
+	h1 {font-size: 5vw; margin-top:1vw;margin-bottom:1vw;font-weight: bold;}
+	h2 {font-size: 2vw; margin-top:1vw;margin-bottom:1vw;}
+	.table td, .table th {
+		padding: 0.4vh 1vw 0.4vh 1vw;
+		vertical-align: top;
+	}	
+	p.adres, #informacje span{margin-top:1.33vw; margin-bottom:0;}
+	
+	span#czas,span#pogoda {
+		display: block;
+		clear: both;
+		text-align: right;
+	}	
+	span#pogoda {display:inline;font-size:0.90em;}
+	
+	
+#modalx {
+    z-index: 9;
+    display: none;
+    position: absolute;
+    top: 1rem;
+    left: 40vw;
+    background: red;
+    color: white;
+    min-width: 8em;
+    padding: 0.3em;
+    min-height: 2em;
+    border: 1px solid navy;
+    opacity: 0.8;
+    border-radius: 0.5em;
+    box-shadow: 2px 2px 2px 0px #444;
+	font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+}
+ 
+/**/
+/*
+div#informacje {
+    position: fixed;
+    display: inline-block;
+    bottom: 1px;
+    left: 0;
+    width: 100%;
+    height: 38px;
+    background: #ddd;
+    z-index: 99;
+	opacity:0.95;
+	font-size:0.9em;
+	
+}
+div#informacje span#pogoda,div#informacje span#tramwaje {
+    border-radius: 0.25em;
+    padding: 4px 15px;
+    margin: 4px 10px;
+	height:23px;
+}
+
+div#informacje span#pogoda    {background:#ffd; float:right;}
+*/
