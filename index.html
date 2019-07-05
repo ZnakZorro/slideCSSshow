@@ -439,6 +439,9 @@ function setBlask(){
 }
 
 function checkView(){
+	var planBOX = document.querySelector('#planTV').getBoundingClientRect();
+	console.log('planBOX=',planBOX)
+	//console.log('planBot=',Math.round(planBOX.bottom))
 //2160x3839
 //560x994
 //3839/994=3.86
@@ -452,6 +455,7 @@ function checkView(){
 			var offset   = Math.round(h-lastElement);
 			//console.log(koniec.getBoundingClientRect())
 			console.log((w-ww)+' checkView=',ww+' / '+w+' x '+h+' offset to BOTTOM=' + offset,'lastElement='+lastElement);
+			console.log(imagesLen+' *******************************************************');
 			document.getElementById('debug').textContent=(w-ww)+' ('+ww+') '+w+' x '+h+' > '+offset;
 	return (w-ww)+' ('+ww+') '+w+' x '+h+' > '+offset;
 }
@@ -559,12 +563,14 @@ window.addEventListener('resize', function(event){
 
 	function installAnimation(){
 		console.log('installAnimation() imagesLen=',imagesLen)
-		var sekund = imagesLen*30;
 			var w = window.innerWidth;
 			var h = window.innerHeight;
 			var koniec = document.querySelector('#planTV');
 			//console.log(koniec.getBoundingClientRect())
-			var botttom    = Math.round(koniec.getBoundingClientRect().bottom);
+			var top    = Math.round(koniec.getBoundingClientRect().top);
+			var botttom    = Math.round(koniec.getBoundingClientRect().bottom)-top;
+			var sekund = ((imagesLen-1)*20);
+
 			//console.log(w,h,'bottom='+botttom,'sekund='+sekund)
 		var sheet = document.styleSheets[0];
 		//console.log(sheet)
@@ -572,24 +578,45 @@ window.addEventListener('resize', function(event){
 		//sheet.insertRule("#planTV {background: #567d46;}");
 		sheet.insertRule("#planTV {background: #eee;}");
 		sheet.insertRule("#planTV {color: #222;}");
+			/*
+			//https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations
 			sheet.insertRule("#planTV {-webkit-animation-name: move;}");
 			sheet.insertRule("#planTV {-webkit-animation-duration: "+sekund+"s;}");
 			sheet.insertRule("#planTV {-webkit-animation-iteration-count: infinite;}");
 			sheet.insertRule("#planTV {-webkit-animation-timing-function: linear;}");
-			sheet.insertRule("#planTV:hover  {-webkit-animation-play-state: paused;}");
+			//sheet.insertRule("#planTV:hover  {-webkit-animation-play-state: paused;}");
 				sheet.insertRule("#planTV {animation-name: move;}");
 				sheet.insertRule("#planTV {animation-duration: "+sekund+"s;}");
 				sheet.insertRule("#planTV {animation-iteration-count: infinite;}");
 				sheet.insertRule("#planTV {animation-timing-function: linear;}");
-				sheet.insertRule("#planTV:hover  {animation-play-state: paused;}");
-		sheet.insertRule("@-webkit-keyframes move {0% {margin-top: 0px;} 100% {margin-top: -"+botttom+"px;}}");
-		sheet.insertRule("@keyframes move {0% {margin-top: 0px;} 100% {margin-top: -"+botttom+"px;}}");
-		//sheet.insertRule("@-webkit-keyframes move {0% {margin-top: 0px;} 50% {margin-top: -"+botttom+"px;} 0% {margin-top: 0px;}}");
-		//sheet.insertRule("@keyframes move {0% {margin-top: 0px;} 10% {margin-top: -"+botttom+"px;} 0% {margin-top: 0px;}}");
+				sheet.insertRule("#planTV {animation-direction: alternate;}");
+				*/
+				//sheet.insertRule("#planTV {animation:"+sekund+"s linear infinite alternate move}");
+				sheet.insertRule("#planTV {animation:"+sekund+"s linear infinite forwards move}");
+				//animation:9s linear infinite alternate forwards scrolling;
+				
+				//sheet.insertRule("#planTV:hover  {animation-play-state: paused;}");
+		//sheet.insertRule("@-webkit-keyframes move {0% {margin-top: 0px;} 100% {margin-top: -"+botttom+"px;}}");
+		//sheet.insertRule("@keyframes move {0% {margin-top: 0px;} 100% {margin-top: -"+botttom+"px;}}");
+		sheet.insertRule("@-webkit-keyframes move {from {margin-top: 0px;} to {margin-top: -"+botttom+"px;}}");
+		sheet.insertRule("@keyframes move {from {margin-top: 0px;} to {margin-top: -"+botttom+"px;}}");
+					//sheet.insertRule("@-webkit-keyframes move {0% {margin-top: 0px;} 50% {margin-top: -"+botttom+"px;} 0% {margin-top: 0px;}}");
+					//sheet.insertRule("@keyframes move {0% {margin-top: 0px;} 10% {margin-top: -"+botttom+"px;} 0% {margin-top: 0px;}}");
+		
+		var timeout = sekund*1000;
+		//ogranicznik
+		if (timeout<600000) timeout = 600000;
+		console.log('timeout='+timeout+'  sekund='+sekund);
+		setTimeout(function(){window.location.reload(false);},timeout);
 		checkView();
+		koniec.addEventListener("animationend", animacjaKoniec, false);
 	}
 
-
+var animacjaKoniec = function(a){
+	console.log("animacjaKoniec")
+	console.log(a)
+	setTimeout(function(){window.location.reload(false);},3000);
+}
 
 	function shuffle(a) {
 		var j, x, i;
@@ -604,7 +631,7 @@ window.addEventListener('resize', function(event){
 	var incrementCounter = function(){
 		imagesCounter++;
 		//console.log('incrementCounter',imagesCounter,imagesLen)
-		if (imagesCounter===imagesLen) installAnimation();
+		if (imagesCounter===imagesLen) setTimeout(function(){console.log(111);installAnimation();},111);
 	}	
 		
 	function scrollUp(){
@@ -635,10 +662,14 @@ window.addEventListener('resize', function(event){
 		//obj = shuffle(obj);
 		//console.log(obj.length,obj)
 		_$("#planTV").innerHTML = '';
+		var ogranicznik=0;
 		obj.forEach(function(foto){
 			var title = createTittle(foto);
-			console.log(title);
-			_$("#planTV").innerHTML += '<div class="slide"><img src="'+foto+'" /><br />'+title+'</div>';
+			//console.log(title);
+			//if (ogranicznik<2) 
+				_$("#planTV").innerHTML += '<div class="slide"><img src="'+foto+'" /><br />'+title+'</div>';
+			ogranicznik++;
+			
 		});
 		scrollUp();
 		
@@ -660,7 +691,7 @@ setInterval(function(){
 		//console.log('refresh.json=',ret);
 		if (ret){
 			var ileret = parseInt(ret);
-			console.log('--------z odczytu--ileret=',ileret);
+			//console.log('--------z odczytu--ileret=',ileret);
 			if (ileret>0){
 				ileret--;
 				console.log('--------do zapisu--ileret=',ileret);
@@ -670,7 +701,7 @@ setInterval(function(){
 			}
 		}
 	});
-},5000);
+},13333);
 // co 5 sek - czy refresh ***************************************************************************
 
 

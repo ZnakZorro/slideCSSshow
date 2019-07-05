@@ -1,7 +1,12 @@
+/**************/
+var ver = "9b";
+/**************/
+
 var WIZUT = 0;
 var TV_WI_1 = 1;
 // usuniete zostaną wszystkie cache oprocz bialej listy
-var cacheWhitelist = ['cache_WIZUT-v3','cache_TV_WI-vv'];
+
+var cacheWhitelist = ['cache_WIZUT-'+ver,'cache_TV_WI-'+ver];
 
 var CACHE_NAME = cacheWhitelist[TV_WI_1];
 

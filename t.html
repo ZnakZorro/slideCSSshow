@@ -1,0 +1,130 @@
+<style>
+
+body {
+  font-family: sans-serif;
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+aside {
+  width: 200px;
+  background: #111;
+  color: #fff;
+  transition: width 1s;
+}
+
+.no-aside {
+  width: 60px;
+}
+
+main {
+  background: #eee;
+}
+
+h1,
+p {
+  margin: 1rem;
+}
+
+p {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.toggle {
+  width: 40px;
+  height: 40px;
+  display: block;
+  position: relative;
+  margin-top: 1rem;
+}
+
+.toggle i,
+.toggle i::after,
+.toggle i::before {
+  position: absolute;
+  width: 40px;
+  height: 4px;
+  border-radius: 4px;
+  transition: transform 0.15s;
+  background-color: #fff;
+}
+
+.toggle i {
+  top: 46%;
+  left: 18%;
+  display: block;
+  background: #eee;
+}
+
+.toggle i::before {
+  top: -10px;
+}
+
+.toggle i::after {
+  bottom: -10px;
+}
+
+.toggle i::after,
+.toggle i::before {
+  content: "";
+  display: block;
+}
+
+.toggle i::before {
+  transform: translate3d(-8px, 0, 0) rotate(-45deg) scale(0.7, 1);
+}
+
+.toggle i::after {
+  transform: translate3d(-8px, 0, 0) rotate(45deg) scale(0.7, 1);
+}
+
+.no-aside .toggle i::before,
+.no-aside .toggle i::after {
+  transform: none;
+}
+
+nav {
+    color: white;
+    margin-left: 40px;
+}
+
+</style>
+
+
+
+<body>
+<aside class="no-aside">
+  <a class="toggle">
+    <i></i>
+  </a>
+	<nav>
+		<ul>
+			<li>na v</li>
+			<li>na v</li>
+			<li>na v</li>
+			<li>na v</li>
+		</ul>
+	</nav>
+</aside>
+<main>
+  <h1> Transitions on grid-template-columns (sort of..)</h1>
+  <p>CSS Grid is supposed to have five animatable properties: <code>grid-gap, grid-row-gap, grid-column-gap, grid-template-columns and grid-template-rows</code></p>
+  <p>But browsers have not implemented it  so far.</p>
+  <p>Here's a typical example where we would like to animate the <code>grid-template-columns</code>: adjusting the column track width for the aside menu. Unfortunatelly, that's not possible at the moment.</p>
+ <p> But we can use this hack, which consist on animating the width of the aside instead, while setting the <code>grid-template-columns</code> as  <code>min-content 1fr</code> </p>
+  <p><strong>Toggle the menu</strong> to check it </p>
+</main>
+
+
+</body>
+<script>
+
+document.querySelector('.toggle').addEventListener('click', e =>
+  document.querySelector('aside').classList.toggle('no-aside')
+)
+
+</script>
